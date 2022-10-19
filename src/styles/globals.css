@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: white;
+}
+
+:empty:not(:focus):after {
+    content:attr(placeholder);
+    color: #555;
+    display: block; /* For Firefox */
+    opacity: 0.4;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    z-index: -10;
+}
+
+:empty:focus:after {
+    content: "ㅤ";
+}
+
+*:hover:empty:not(:focus):after{
+    opacity: 1;
+    z-index: -10;
+  }
