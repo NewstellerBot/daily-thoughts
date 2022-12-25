@@ -41,8 +41,27 @@ const EditablePage = () => {
   // If user opens the menu, this stores backup of html before the menu opened
   const backupHtml = useRef<null | { blockId: string; html: string }>(null)
 
+  const blocksBounds = useRef<({ top: number; bot: number } | null)[]>()
+
+  useEffect(() => {
+    console.log('blocks updated')
+    blocksBounds.current = blocks.map((b) => getElementBounds(b.id))
+  }, [blocks])
+
   const openMenu = (x: number, y: number) => setMenu({ x, y })
   const closeMenu = () => setMenu(null)
+
+  const getElementBounds = (
+    id: string | undefined
+  ): { top: number; bot: number } | null => {
+    if (id === undefined) {
+      return null
+    }
+    const el = document.querySelector(`#${id}`)
+    if (!el) throw Error(`block with this id does not exist, id: ${id}`)
+    const { top, bottom } = el.getBoundingClientRect()
+    return { top, bot: bottom }
+  }
 
   const addBlock = async (block: Block) => {
     const index = blocks.findIndex((b: Block) => b.id === currentBlock)
@@ -171,6 +190,60 @@ const EditablePage = () => {
     )
   }
 
+  const handleStopDrag = (e: React.MouseEvent, draggedBlock: Block) => {
+    // We only wanna handle the drag if there are at least two blocks
+
+    setBlocks((_blocks) => {
+      const newBlocks = [..._blocks]
+
+      if (blocksBounds.current) {
+        const index = blocks.findIndex((b) => {
+          return b === draggedBlock
+        })
+        const { clientY: y } = e
+
+        for (let i = 0; i < blocksBounds.current.length; i++) {
+          const El = blocksBounds.current[i]
+          const nextEl = blocksBounds.current[i + 1] || null
+
+          if (El && nextEl != null) {
+            const top = El.top
+            const bot = nextEl.bot
+            if (i == 0) {
+              if (y < top && i !== index) {
+                newBlocks.splice(0, 0, draggedBlock)
+                newBlocks.splice(index + 1, 1)
+                break
+              }
+            }
+            if (y > top && y < bot && i !== index) {
+              newBlocks.splice(i + 1, 0, draggedBlock)
+              if (i < index) {
+                newBlocks.splice(index + 1, 1)
+              } else {
+                newBlocks.splice(index, 1)
+              }
+              break
+            }
+          } else if (El) {
+            const bot = El.bot
+            if (y > bot && i !== index) {
+              newBlocks.push(draggedBlock)
+              newBlocks.splice(index, 1)
+              break
+            }
+          }
+        }
+      }
+      if (getDay?.data?.id)
+        replaceBlocksDay.mutate({
+          id: getDay.data.id,
+          blockIds: newBlocks.map((b) => b.id),
+        })
+      return newBlocks
+    })
+  }
+
   useEffect(() => {
     if (prevBlocks && (prevBlocks as Block[]).length + 1 === blocks.length) {
       // New block was added
@@ -274,6 +347,9 @@ const EditablePage = () => {
                 onFocus={handleFocus}
                 onChange={handleChange}
                 menu={menu !== null}
+                handleStopDrag={(e: React.MouseEvent) =>
+                  handleStopDrag(e, block)
+                }
               />
             )
           })}
