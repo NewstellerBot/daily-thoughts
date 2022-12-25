@@ -58,24 +58,24 @@ const Home: NextPage = () => {
               </h2>
             </div>
             <div className="flex gap-2 flex-col">
-              <h2 className="text-7xl md:text-8xl font-extrabold">
+              <h2 className="text-6xl sm:text-7xl md:text-8xl font-extrabold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-pink-500 to-purple-500">
                   Thoughts
                 </span>
               </h2>
               <h2 className="text-7xl md:text-8xl font-extrabold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-purple-500 to-teal-500">
-                  Funny Texts
+                  Reflections
                 </span>
               </h2>
               <h2 className="text-7xl md:text-8xl font-extrabold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-teal-500 to-purple-500">
-                  Pictures
+                  Speculations
                 </span>
               </h2>
               <h2 className="text-7xl md:text-8xl font-extrabold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-purple-500 to-pink-500">
-                  Memes
+                  Deliberations
                 </span>
               </h2>
             </div>
