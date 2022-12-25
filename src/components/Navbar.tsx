@@ -9,7 +9,7 @@ export default function Navbar() {
       <nav className="h-20 bg-cyan-50 border-b border-cyan-200 text-cyan-900">
         <div className="grid grid-cols-2 md:grid-cols-3 items-center max-w-4xl mr-auto ml-auto h-full px-5">
           <Link href="/">
-            <a className="flex flex-grow-0">
+            <a className="flex w-fit">
               <div className="col-start-1 flex items-center justify-start mr-5">
                 <Image src="/logo/teal.svg" width={40} height={40} alt="" />
                 <span className="font-bold ml-2">DailyThought</span>
