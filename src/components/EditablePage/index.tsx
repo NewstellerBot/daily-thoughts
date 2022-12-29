@@ -84,8 +84,6 @@ const EditablePage = () => {
   }
 
   const deleteBlock = async (id: string) => {
-    await destroyBlock.mutateAsync({ id })
-
     setBlocks((prevBlocks) => {
       const index = prevBlocks.findIndex((block: Block) => block.id === id) - 1
       const newBlocks = prevBlocks.filter((block: Block) => block.id !== id)
@@ -98,6 +96,7 @@ const EditablePage = () => {
         })
       return newBlocks
     })
+    await destroyBlock.mutateAsync({ id })
   }
 
   const recoverHtml = () => {
