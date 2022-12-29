@@ -2,9 +2,11 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
-import Layout from '../components/Layout'
-import EditablePage from '../components/EditablePage'
+import Layout from '@components/Layout'
+import EditablePage from '@components/EditablePage'
+import Button from '@ui/Button'
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession()
@@ -41,44 +43,43 @@ const Home: NextPage = () => {
       </Head>
 
       <Layout>
-        <div className="min-h-screen mb-5 md:mb-10 flex items-center justify-center">
-          <div className="flex flex-col items-center justify-center text-center gap-8">
-            <div>
-              <div className="flex flex-col items-center mb-5 gap-5">
-                <div className="h-52 w-52 relative lg:h-64 lg:w-64">
-                  <Image src="/logo/black.svg" alt="" layout="fill" />
-                </div>
-                <h1 className="text-7xl md:text-8xl lg:text-9xl font-extrabold">
-                  Daily Thought
-                </h1>
-              </div>
-
-              <h2 className="font-semibold text-5xl">
-                A place to archive your daily
-              </h2>
+        <div className="flex flex-col items-center justify-center text-center gap-8 my-10">
+          <div className="flex gap-5 flex-col items-center max-w-xl">
+            <div className="relative w-60 h-60 overflow-hidden rounded-full">
+              <Image src="/brain.png" layout="fill" alt="" />
             </div>
-            <div className="flex gap-2 flex-col">
-              <h2 className="text-6xl sm:text-7xl md:text-8xl font-extrabold">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold">
+              We create your daily archive
+            </h1>
+            <p className="text-normal md:text-lg text-neutral-700">
+              Store your thoughts, reflections, speculations, and deliberations
+              daily to create a chronic of your mind.
+            </p>
+            <Link href="/api/auth/signin">
+              <a>
+                <Button>Sign Up</Button>
+              </a>
+            </Link>
+            {/* <h2 className="text-4xl sm:text-7xl md:text-8xl font-extrabold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-pink-500 to-purple-500">
                   Thoughts
                 </span>
               </h2>
-              <h2 className="text-7xl md:text-8xl font-extrabold">
+              <h2 className="text-4xl md:text-8xl font-extrabold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-purple-500 to-teal-500">
                   Reflections
                 </span>
               </h2>
-              <h2 className="text-7xl md:text-8xl font-extrabold">
+              <h2 className="text-4xl md:text-8xl font-extrabold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-teal-500 to-purple-500">
                   Speculations
                 </span>
               </h2>
-              <h2 className="text-7xl md:text-8xl font-extrabold">
+              <h2 className="text-4xl md:text-8xl font-extrabold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-b from-purple-500 to-pink-500">
                   Deliberations
                 </span>
-              </h2>
-            </div>
+              </h2> */}
           </div>
         </div>
       </Layout>
