@@ -129,7 +129,7 @@ const EditableBlock = ({
               },
               className: `${
                 editableBlockStyles[type]
-              } px-2 py-1 rounded py-1 my-2 ${
+              } px-2 py-1 rounded py-1 my-2 leading-relaxed ${
                 editable
                   ? 'focus:ring-blue-500 focus:bg-blue-50 hover:bg-slate-50 transition flex-1'
                   : ''

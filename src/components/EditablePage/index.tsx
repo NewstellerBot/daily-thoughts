@@ -15,7 +15,7 @@ const uuid = () => `b-${uuid4()}`
 
 const defaultBlock: { type: BlockType; html: string } = {
   type: 'p',
-  html: '',
+  html: '<br>',
 }
 
 const EditablePage = () => {
