@@ -36,8 +36,8 @@ const Home: NextPage = () => {
 
   if (status === 'loading')
     return (
-      <div className="h-52 grid place-items-center p-10">
-        <div className="relative h-10 w-10 animate-spin">
+      <div className="h-screen grid place-items-center p-10">
+        <div className="relative h-28 w-28 animate-spin">
           <Image src="/logo/logo.png" alt="logo" layout="fill" />
         </div>
       </div>
