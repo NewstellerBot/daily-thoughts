@@ -34,6 +34,7 @@ const Home: NextPage = () => {
       </>
     )
 
+  if (status === 'loading') return <div>Loading...</div>
   return (
     <>
       <Head>
