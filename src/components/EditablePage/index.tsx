@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { v4 as uuid4 } from 'uuid'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 
 import { trpc } from '../../utils/trpc'
 
@@ -356,7 +357,13 @@ const EditablePage = () => {
         </div>
       </>
     )
-  return <div />
+  return (
+    <div className="w-screen h-52 grid place-items-center">
+      <div className="relative h-52 w-52 animate-spin">
+        <Image src="/logo/logo.png" alt="logo" layout="fill" />
+      </div>
+    </div>
+  )
 }
 
 export default EditablePage
