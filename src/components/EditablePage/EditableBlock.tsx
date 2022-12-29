@@ -116,9 +116,11 @@ const EditableBlock = ({
             ref={ref}
             style={{ ...styles }}
           >
-            <span className="text-xl h-3 w-3 mr-2 handle cursor-grab rotate-90 opacity-60 hover:opacity-100 transition-opacity">
-              <FontAwesomeIcon icon={faGrip} />
-            </span>
+            {editable ?? (
+              <span className="text-xl h-3 w-3 mr-2 handle cursor-grab rotate-90 opacity-60 hover:opacity-100 transition-opacity">
+                <FontAwesomeIcon icon={faGrip} />
+              </span>
+            )}
             {React.createElement(type, {
               contentEditable: editable,
               id,
