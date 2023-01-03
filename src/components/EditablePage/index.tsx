@@ -31,6 +31,8 @@ const EditablePage = () => {
   const getDay = trpc.useQuery(['day.get', { userId: session?.user.id || '' }])
   const replaceBlocksDay = trpc.useMutation(['day.replaceBlocks'])
 
+  const [isDragging, setIsDragging] = useState(false)
+
   // Initiate states
   // Stores all blocks that are on the page
   const [blocks, setBlocks] = useState<Block[]>([])
@@ -43,6 +45,14 @@ const EditablePage = () => {
   const backupHtml = useRef<null | { blockId: string; html: string }>(null)
 
   const blocksBounds = useRef<({ top: number; bot: number } | null)[]>()
+
+  useEffect(() => {
+    if (isDragging) {
+      document.body.style.overflowY = 'hidden'
+    } else {
+      document.body.style.overflowY = 'auto'
+    }
+  }, [isDragging])
 
   useEffect(() => {
     console.log('blocks updated')
@@ -190,9 +200,13 @@ const EditablePage = () => {
     )
   }
 
-  const handleStopDrag = (e: React.MouseEvent, draggedBlock: Block) => {
-    // We only wanna handle the drag if there are at least two blocks
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleStartDrag = (_e: React.MouseEvent) => {
+    setIsDragging(true)
+  }
 
+  const handleStopDrag = (e: React.MouseEvent, draggedBlock: Block) => {
+    setIsDragging(false)
     setBlocks((_blocks) => {
       const newBlocks = [..._blocks]
 
@@ -350,6 +364,7 @@ const EditablePage = () => {
                 handleStopDrag={(e: React.MouseEvent) =>
                   handleStopDrag(e, block)
                 }
+                handleStartDrag={handleStartDrag}
               />
             )
           })}

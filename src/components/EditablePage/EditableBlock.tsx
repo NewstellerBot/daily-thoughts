@@ -56,6 +56,7 @@ export type EditableBlockProps = {
   onClick?: (e: React.MouseEvent) => void
   onFileDrop?: (acceptedFile: File[]) => void
   handleStopDrag?: (e: React.MouseEvent, id: string) => void
+  handleStartDrag?: (e: React.MouseEvent) => void
   menu?: boolean
 }
 
@@ -73,6 +74,7 @@ const EditableBlock = ({
   onClick,
   position,
   handleStopDrag,
+  handleStartDrag,
 }: EditableBlockProps) => {
   const ref = useRef<null | HTMLDivElement>(null)
 
@@ -109,6 +111,10 @@ const EditableBlock = ({
             api.start({ scale: 1 })
             if (handleStopDrag !== undefined)
               handleStopDrag(e as React.MouseEvent, id)
+          }}
+          onStart={(e) => {
+            if (handleStartDrag !== undefined)
+              handleStartDrag(e as React.MouseEvent)
           }}
         >
           <animated.div
