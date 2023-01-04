@@ -10,6 +10,7 @@ import Menu from './Menu'
 
 import EditableBlock, { Block, BlockType } from './EditableBlock'
 import debounce from '../../utils/debounce'
+import { DraggableEvent } from 'react-draggable'
 
 const uuid = () => `b-${uuid4()}`
 
@@ -201,11 +202,19 @@ const EditablePage = () => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleStartDrag = (_e: React.MouseEvent) => {
+  const handleStartDrag = (_e: DraggableEvent) => {
     setIsDragging(true)
   }
 
-  const handleStopDrag = (e: React.MouseEvent, draggedBlock: Block) => {
+  const handleStopDrag = (e: DraggableEvent, draggedBlock: Block) => {
+    const getY = (e: DraggableEvent) => {
+      if (e.type === 'touchend') {
+        const touch = (e as TouchEvent).changedTouches[0]
+        if (touch !== undefined) return touch.clientY
+      }
+      return (e as MouseEvent).clientY
+    }
+
     setIsDragging(false)
     setBlocks((_blocks) => {
       const newBlocks = [..._blocks]
@@ -214,7 +223,8 @@ const EditablePage = () => {
         const index = blocks.findIndex((b) => {
           return b === draggedBlock
         })
-        const { clientY: y } = e
+
+        const y = getY(e)
 
         for (let i = 0; i < blocksBounds.current.length; i++) {
           const El = blocksBounds.current[i]
@@ -361,10 +371,8 @@ const EditablePage = () => {
                 onFocus={handleFocus}
                 onChange={handleChange}
                 menu={menu !== null}
-                handleStopDrag={(e: React.MouseEvent) =>
-                  handleStopDrag(e, block)
-                }
-                handleStartDrag={handleStartDrag}
+                handleStopDrag={(e: DraggableEvent) => handleStopDrag(e, block)}
+                handleStartDrag={(e: DraggableEvent) => handleStartDrag(e)}
               />
             )
           })}

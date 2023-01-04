@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react'
+import React, { MouseEvent, useEffect, useRef } from 'react'
 import * as DOMPurify from 'dompurify'
 import { useSpring, animated } from 'react-spring'
-import { DraggableCore } from 'react-draggable'
+import { DraggableCore, DraggableEvent } from 'react-draggable'
 import { faGrip } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -55,8 +55,8 @@ export type EditableBlockProps = {
   onKeyUp?: (e: React.KeyboardEvent) => void
   onClick?: (e: React.MouseEvent) => void
   onFileDrop?: (acceptedFile: File[]) => void
-  handleStopDrag?: (e: React.MouseEvent, id: string) => void
-  handleStartDrag?: (e: React.MouseEvent) => void
+  handleStopDrag?: (e: DraggableEvent) => void
+  handleStartDrag?: (e: DraggableEvent) => void
   menu?: boolean
 }
 
@@ -107,14 +107,13 @@ const EditableBlock = ({
           handle={'.handle'}
           offsetParent={wrapperRef.current || undefined}
           onStop={(e) => {
+            console.log(e.type)
             api.set({ y: 0 })
             api.start({ scale: 1 })
-            if (handleStopDrag !== undefined)
-              handleStopDrag(e as React.MouseEvent, id)
+            if (handleStopDrag) handleStopDrag(e)
           }}
           onStart={(e) => {
-            if (handleStartDrag !== undefined)
-              handleStartDrag(e as React.MouseEvent)
+            if (handleStartDrag !== undefined) handleStartDrag(e)
           }}
         >
           <animated.div

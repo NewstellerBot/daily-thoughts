@@ -49,8 +49,8 @@ export default function Navbar() {
   //   )
   return (
     <header className="md:h-20 bg-cyan-50 border-b border-cyan-200 text-cyan-900 md:grid md:place-items-center">
-      <div className="flex items-center flex-col md:flex-row">
-        <div className="flex justify-between md:grid md:grid-cols-3 items-center h-full px-5 py-3 w-full">
+      <div className="flex items-center flex-col md:flex-row w-full md:px-5 justify-center">
+        <div className="items-center h-full px-5 py-3 w-full flex justify-between md:max-w-xl">
           <Link href="/">
             <a>
               <div className="col-start-1 flex items-center justify-start mr-5">
@@ -66,7 +66,7 @@ export default function Navbar() {
         <nav
           className={`${
             open ? 'flex' : 'hidden'
-          } md:flex flex-col md:flex-row text-semibold md:col-start-2`}
+          } md:flex flex-col md:flex-row text-semibold md:col-start-2 py-2 text-center`}
         >
           <Link href="/">
             <a className="px-6 py-3 rounded hover:bg-cyan-100 transition">
