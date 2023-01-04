@@ -121,7 +121,7 @@ const EditableBlock = ({
             style={{ ...styles }}
           >
             {editable ? (
-              <span className="text-xl h-3 w-3 mr-2 handle cursor-grab rotate-90 opacity-60 hover:opacity-100 transition-opacity">
+              <span className="text-xl h-6 md:h-3 w-6 md:w-3 mr-2 handle cursor-grab rotate-90 opacity-60 hover:opacity-100 transition-opacity">
                 <FontAwesomeIcon icon={faGrip} />
               </span>
             ) : null}
