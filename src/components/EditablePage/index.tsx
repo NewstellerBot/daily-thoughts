@@ -315,7 +315,7 @@ const EditablePage = () => {
           recoverHtml={recoverHtml}
         />
 
-        <div className="relative" ref={draggableWrapperRef}>
+        <div className="relative px-4" ref={draggableWrapperRef}>
           {/* <div className="p-20 bg-cyan-400 rounded text-white grid place-items-center">
             T
           </div>

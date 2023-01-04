@@ -5,7 +5,6 @@ import { DraggableCore, DraggableEvent } from 'react-draggable'
 import { faGrip } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-// TODO: change to enum
 export type BlockType = 'p' | 'h1' | 'h2' | 'h3'
 
 export type Block = {
