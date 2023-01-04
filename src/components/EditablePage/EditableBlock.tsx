@@ -140,7 +140,7 @@ const EditableBlock = ({
                   ? 'focus:ring-blue-500 focus:bg-blue-50 hover:bg-slate-50 transition flex-1'
                   : ''
               } z-10`,
-              placeholder: editable ? 'Type here...' : '',
+              placeholder: editable ? 'Press "/" to add different block' : '',
               tabIndex: 0,
               onKeyDown,
               onFocus,
